@@ -1,0 +1,14 @@
+{
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": false,
+    "editor.formatOnSave": true,
+    "cmake.installPrefix": "${workspaceFolder}",
+    "cmake.environment": {
+        "PATH": "${env:PATH};C:/mingw64/fltk-1.3.8-cmake/bin"
+    },
+    "C_Cpp.default.includePath": [
+        "/home/oleg/Документы/programming-with-cpp/projects/lib"
+    ],
+    "cmake.sourceDirectory": "/home/oleg/Документы/programming-with-cpp/projects",
+    "C_Cpp.errorSquiggles": "disabled"
+}

@@ -1,43 +1,92 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
+#include <cstdio>
+#include <cstdint>
+
+static unsigned char present[10000005];
+
+static char buffer[1 << 22];
+static char *ptr = buffer;
+static char *endPtr = buffer;
+
+inline void refill()
+{
+    size_t sz = fread(buffer, 1, sizeof(buffer), stdin);
+    ptr = buffer;
+    endPtr = buffer + sz;
+}
+
+inline uint32_t readInt()
+{
+    while (ptr >= endPtr)
+        refill();
+
+    while (*ptr <= ' ')
+    {
+        ++ptr;
+        if (ptr >= endPtr)
+            refill();
+    }
+
+    uint32_t x = 0;
+
+    while (*ptr >= '0')
+    {
+        x = x * 10u + uint32_t(*ptr - '0');
+        ++ptr;
+
+        if (ptr >= endPtr)
+            refill();
+    }
+
+    return x;
+}
+
+inline void writeUInt(uint32_t x)
+{
+    char out[12];
+    int len = 0;
+
+    do
+    {
+        out[len++] = char('0' + x % 10);
+        x /= 10;
+    } while (x);
+
+    while (len--)
+        putchar_unlocked(out[len]);
+
+    putchar_unlocked('\n');
+}
 
 int main()
 {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    uint32_t n = readInt();
 
-    int n;
-    if (!(std::cin >> n))
-        return 0;
+    uint32_t next = 1;
+    uint32_t waiting = 0;
+    uint32_t answer = 0;
 
-    std::priority_queue<int, std::vector<int>, std::greater<int>> group_heap;
-
-    int next_expected = 1;
-    int max_len = 0;
-
-    for (int i = 0; i < n; i++)
+    for (uint32_t i = 0; i < n; i++)
     {
-        int num;
-        std::cin >> num;
+        uint32_t x = readInt();
 
-        group_heap.push(num);
+        present[x] = 1;
+        ++waiting;
 
-        int cur_len = group_heap.size();
-        if (cur_len > max_len)
+        while (next <= n && present[next])
         {
-            max_len = cur_len;
+            present[next] = 0;
+            --waiting;
+            ++next;
         }
 
-        while (!group_heap.empty() && group_heap.top() == next_expected)
-        {
-            group_heap.pop();
-            next_expected++;
-        }
+        if (waiting > answer)
+            answer = waiting;
     }
 
-    std::cout << max_len - 1 << "\n";
+    writeUInt(answer);
 
     return 0;
 }

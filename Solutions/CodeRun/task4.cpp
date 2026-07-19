@@ -1,83 +1,76 @@
-#include <iostream>
-#include <vector>
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
-long long a, b;
-long long M;
+#include <cstdio>
 
-struct Matrix
+char arrived[10000005];
+
+inline int readInt()
 {
-    long long a;
-    long long b;
-    long long c;
-    long long d;
-
-    Matrix(long long a, long long b, long long c, long long d) : a(a), b(b), c(c), d(d) {}
-
-    Matrix operator*(const Matrix &other)
+    int c = getchar_unlocked();
+    while (c <= 32)
     {
-        return Matrix((a * other.a + b * other.c) % M,
-                      (a * other.b + b * other.d) % M,
-                      (c * other.a + d * other.c) % M,
-                      (c * other.b + d * other.d) % M);
+        c = getchar_unlocked();
     }
-};
-
-Matrix power(Matrix A, long long p)
-{
-    Matrix res(1, 0, 0, 1);
-
-    while (p > 0)
+    int res = 0;
+    while (c > 32)
     {
-        if (p % 2 != 0)
-        {
-            res = res * A;
-        }
-        A = A * A;
-        p >>= 1;
+        res = (res << 3) + (res << 1) + (c - '0');
+        c = getchar_unlocked();
     }
     return res;
 }
 
-void approxmate()
+inline void writeInt(int x)
 {
-    long long x, y, n;
-    std::cin >> x >> y >> n;
-
-    if (n == 0)
+    if (x == 0)
     {
-        std::cout << ((x % M + M) % M) << "\n";
+        putchar_unlocked('0');
+        putchar_unlocked('\n');
         return;
     }
-    if (n == 1)
+    char buf[12];
+    int i = 0;
+    while (x > 0)
     {
-        std::cout << ((y % M + M) % M) << "\n";
-        return;
+        buf[i++] = (x % 10) + '0';
+        x /= 10;
     }
-
-    Matrix mat = Matrix(a, b, 1, 0);
-    Matrix suf = power(mat, n - 1);
-
-    long long Fn = (suf.a * y + suf.b * x) % M;
-
-    std::cout << Fn << "\n";
+    while (--i >= 0)
+        putchar_unlocked(buf[i]);
+    putchar_unlocked('\n');
 }
 
 int main()
 {
-    // Помогите мне...
+    int n = readInt();
 
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    int cur_num = 1;
+    int cur_backstage = 0;
+    int max_backstage = 0;
 
-    std::cin >> a >> b;
-    std::cin >> M;
-    int q;
-    std::cin >> q;
-
-    for (int i = 0; i < q; i++)
+    for (int i = 0; i < n; i++)
     {
-        approxmate();
+        int num = readInt();
+
+        arrived[num] = 1;
+        cur_backstage++;
+
+        while (arrived[cur_num])
+        {
+            cur_backstage--;
+            cur_num++;
+            if (cur_num > n)
+                break;
+        }
+
+        if (cur_backstage > max_backstage)
+        {
+            max_backstage = cur_backstage;
+        }
     }
+
+    writeInt(max_backstage);
 
     return 0;
 }

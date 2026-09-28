@@ -10,5 +10,6 @@
         "/home/oleg/Документы/programming-with-cpp/projects/lib"
     ],
     "cmake.sourceDirectory": "/home/oleg/Документы/programming-with-cpp/projects",
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }

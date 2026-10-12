@@ -1,0 +1,1 @@
+/usr/bin/c++ -pedantic -Wall -Wextra -g -Wl,--dependency-file=CMakeFiles/bitwise.dir/link.d CMakeFiles/bitwise.dir/bitwise.cpp.o -o bitwise

@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/oleg/Документы/Algoritms/build/07/calculator",
+  "command": "/usr/bin/c++  -I/home/oleg/Документы/programming-with-cpp/projects/lib -pedantic -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/calculator.dir/calculator.cpp.o -c /home/oleg/Документы/programming-with-cpp/projects/07/calculator/calculator.cpp",
+  "file": "/home/oleg/Документы/programming-with-cpp/projects/07/calculator/calculator.cpp",
+  "output": "07/calculator/CMakeFiles/calculator.dir/calculator.cpp.o"
+},
+{
+  "directory": "/home/oleg/Документы/Algoritms/build/07/bitwise",
+  "command": "/usr/bin/c++  -I/home/oleg/Документы/programming-with-cpp/projects/lib -pedantic -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/bitwise.dir/bitwise.cpp.o -c /home/oleg/Документы/programming-with-cpp/projects/07/bitwise/bitwise.cpp",
+  "file": "/home/oleg/Документы/programming-with-cpp/projects/07/bitwise/bitwise.cpp",
+  "output": "07/bitwise/CMakeFiles/bitwise.dir/bitwise.cpp.o"
+}
+]

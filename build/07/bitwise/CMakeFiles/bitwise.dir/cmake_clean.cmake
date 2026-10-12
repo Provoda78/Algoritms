@@ -1,0 +1,12 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/bitwise.dir/link.d"
+  "CMakeFiles/bitwise.dir/bitwise.cpp.o"
+  "CMakeFiles/bitwise.dir/bitwise.cpp.o.d"
+  "bitwise"
+  "bitwise.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/bitwise.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
